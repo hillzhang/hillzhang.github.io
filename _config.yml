@@ -1,49 +1,27 @@
-# Basic
-title: Hill Zhang
-subtitle: 闲来无事，日常记录
-#welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
-#description: Vno Jekyll is a port of my Ghost theme vno.
-creator: <a href="http://onev.cat">@onevcat</a>
+# Site settings
+title:          Hill Zhang
+description:    "Minimal Jekyll theme for storytellers"
+baseurl:        ""
+url:            "https://hillzhang.github.io"
 
-#url: "http://vno.onevcat.com"
+# Author
+author:
+  name:         Hill Zhang
+  url:          https://hillzhang.github.io
+  email:        hillzhang1992@gmail.com
 
-permalink: /:year/:month/:title/
+# Build settings
+markdown:       kramdown
 
-# Format
-highlighter: rouge
+# Assets
+sass:
+  sass_dir:     _sass
+  style:        compressed
 
-# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-cover_color: red
+# Gems
+plugins:
+  - jekyll-paginate
 
-# The blog button should not be removed.
-blog_button:
-    title: Blog
-    description: Visit blog
-
-# Navigation buttons in the front page.
-nav:
-    #- {title: Projects, description: My Projects, url: 'http://project.onevcat.com'}
-    # - {title: Another Button, description: A button, url: 'http://example.com'}
-
-# Pagination
-gems: [jekyll-paginate]
-paginate: 10
-paginate_path: "page/:num/"
-
-# Comment
-comment:
-    disqus: vno-jekyll
-    # duoshuo: 
-    
-# Social
-social:
-    weibo: onevcat
-    github: onevcat
-    twitter: onevcat
-    gplus: 107108267983477358170
-    mail: onev@onevcat.com
-
-# Google Analytics
-ga:
-    # id: your_ga_id
-    # host: your_host
+# Permalinks
+permalink:      /:year-:month-:day/:title
+paginate:       5
