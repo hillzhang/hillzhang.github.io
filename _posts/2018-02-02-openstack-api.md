@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "部署opsntack"
+title:  "openstack api"
 author: "Hill Zhang"
 ---
 ##　概念
@@ -37,5 +37,8 @@ author: "Hill Zhang"
 }
 ```
 	
+2. 获取相应的peoject　id　或者domain　id　通过获取　scoped token
+
+
     待续
 
