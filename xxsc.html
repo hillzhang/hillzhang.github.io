@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心想事成 - 文艺晨曦版</title>
+    <style>
+        /* --- 1. 全局配置：晨曦渐变 --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            /* 字体升级：优先使用宋体/衬线体，营造文学感 */
+            font-family: "Songti SC", "Noto Serif SC", "SimSun", "STSong", "Times New Roman", serif;
+            
+            /* 动态背景：日出配色 (暖橙->柔粉->天蓝) */
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb, #8fd3f4);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        /* --- 2. 容器与文字 --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .wish-text {
+            font-size: 16vw; /* 宋体稍微大一点更好看 */
+            font-weight: 600; /* 宋体不宜过粗，保留笔锋 */
+            color: #fff;
+            letter-spacing: 0.1em; /* 稍微收紧一点字距，显得紧凑精致 */
+            
+            /* 优化阴影：让文字像浮在云端 */
+            text-shadow: 0 10px 20px rgba(161, 140, 209, 0.4), 0 0 30px rgba(255, 255, 255, 0.6);
+            
+            /* 呼吸动画 */
+            animation: breathe 5s ease-in-out infinite;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .wish-text:active {
+            transform: scale(0.95);
+        }
+
+        .sub-text {
+            margin-top: 2rem;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.95);
+            letter-spacing: 0.3em;
+            
+            /* 字体样式微调：斜体衬线，更有诗意 */
+            font-style: italic; 
+            
+            /* 圆润的背景胶囊 */
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 32px;
+            border-radius: 50px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            
+            display: inline-block;
+            animation: floatUp 1.2s ease-out forwards;
+        }
+
+        /* --- 3. 动画定义 --- */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: translateY(0); letter-spacing: 0.1em; }
+            50% { transform: translateY(-10px); letter-spacing: 0.12em; } /* 呼吸时微微舒展 */
+        }
+
+        @keyframes floatUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) translateX(20px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes expandRing {
+            0% { width: 0; height: 0; opacity: 0.6; border-width: 2px; }
+            100% { width: 300px; height: 300px; opacity: 0; border-width: 0px; }
+        }
+
+        /* --- 4. 装饰元素 --- */
+        /* 漂浮的光斑/泡泡 */
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            backdrop-filter: blur(1px);
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        /* 点击时的光晕 */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            animation: expandRing 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        /* 移动端适配 */
+        @media screen and (min-width: 768px) {
+            .wish-text { font-size: 11rem; }
+            .sub-text { font-size: 2rem; letter-spacing: 0.6em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="wish-text" id="main-text">心想事成</div>
+        <div class="sub-text" id="sub-text">美好的事情即将发生</div>
+    </div>
+
+    <script>
+        const body = document.body;
+        const mainText = document.getElementById('main-text');
+        const subText = document.getElementById('sub-text');
+
+        // 治愈系文案
+        const wishes = [
+            { main: "心想事成", sub: "美好的事情即将发生" },
+            { main: "未来可期", sub: "所求皆如愿 · 所行化坦途" },
+            { main: "好运连连", sub: "生活明朗 · 万物可爱" },
+            { main: "平安喜乐", sub: "岁岁常欢愉 · 年年皆胜意" },
+            { main: "闪闪发光", sub: "保持热爱 · 奔赴山海" },
+            { main: "日日升职", sub: "好事正酿 · 如愿以偿" },
+            { main: "向阳而生", sub: "心中有光 · 脚下有路" }
+        ];
+
+        // 1. 初始化背景泡泡
+        function createBubbles() {
+            const count = 20;
+            for (let i = 0; i < count; i++) {
+                const b = document.createElement('div');
+                b.classList.add('bubble');
+                
+                // 随机大小，宋体版可以稍微小一点，更精致
+                const size = Math.random() * 40 + 10 + 'px';
+                b.style.width = size;
+                b.style.height = size;
+                
+                // 随机位置
+                b.style.left = Math.random() * 100 + 'vw';
+                
+                // 随机动画
+                const duration = Math.random() * 15 + 15 + 's'; // 更慢一点
+                b.style.animation = `rise ${duration} linear infinite`;
+                b.style.animationDelay = Math.random() * -20 + 's'; // 负延迟，开局即有
+                
+                body.appendChild(b);
+            }
+        }
+
+        // 2. 点击交互
+        function handleInteraction(e) {
+            const x = e.clientX;
+            const y = e.clientY;
+
+            // 光晕
+            createRipple(x, y);
+            
+            // 切换文字
+            switchText();
+            
+            // 震动
+            if (navigator.vibrate) navigator.vibrate(30);
+        }
+
+        function createRipple(x, y) {
+            const r = document.createElement('div');
+            r.classList.add('ripple');
+            r.style.left = x + 'px';
+            r.style.top = y + 'px';
+            body.appendChild(r);
+            setTimeout(() => r.remove(), 1000);
+        }
+
+        function switchText() {
+            // 简单的淡入淡出效果
+            mainText.style.opacity = 0;
+            subText.style.opacity = 0;
+            mainText.style.transform = "translateY(10px)";
+            
+            setTimeout(() => {
+                let newItem;
+                do {
+                    newItem = wishes[Math.floor(Math.random() * wishes.length)];
+                } while (newItem.main === mainText.innerText);
+
+                mainText.innerText = newItem.main;
+                subText.innerText = newItem.sub;
+                
+                mainText.style.opacity = 1;
+                subText.style.opacity = 1;
+                mainText.style.transform = "translateY(0)";
+            }, 300);
+        }
+
+        // 绑定事件
+        document.addEventListener('click', handleInteraction);
+        document.addEventListener('touchstart', (e) => {
+            handleInteraction({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
+        }, {passive: true});
+
+        createBubbles();
+
+    </script>
+</body>
+</html>
